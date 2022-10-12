@@ -4,16 +4,13 @@ export default function Search({ data }) { //Search city and returns weather inf
 
   const [cityName, setCityName] = useState(""); // stores city name
   const [weatherData, setWeatherData] = useState(); // stores weather data
-
-  //const APIkey = "77bdcf67b0f7ca8f63d5d16f23bc7c8d"; //OpenWeather API KEY
-  const APIkey = "985ca5801eb64a1294f51952220910"; //WeatherAPI API KEY
+  const APIkey = process.env.REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => { // Re-renders once the weather information has been changed/received
     data(weatherData);
   }, [weatherData]);
 
   const fetchInfo = (city) => { // Gets weather data depending on the city sent
-    //fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=77bdcf67b0f7ca8f63d5d16f23bc7c8d`)
     fetch(`http://api.weatherapi.com/v1/current.json?key=${APIkey}&q=${city}`)
       .then((response) => response.json())
       .then((response) => {
