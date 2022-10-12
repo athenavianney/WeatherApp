@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import Search from './components/Search';
+import WeatherCard from './components/WeatherCard';
 
 function App() {
+const [weatherInfo, setWeatherInfo] = useState();
+
+  const handleData = (data) => {
+    setWeatherInfo(data);
+    console.log("Recibe info en App");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search data={handleData}/>
+      <hr/>
+      {weatherInfo !== undefined && <WeatherCard info={weatherInfo}/>}
     </div>
   );
 }
