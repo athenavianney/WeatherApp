@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./weather.css";
+import moment from "moment/moment";
 
-export default function CurrentCard({ info }) { //shows the current forecast
+export default function CurrentCard({ info }) {
+  //shows the current forecast
   const [weatherInfo, setWeatherInfo] = useState();
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
@@ -9,27 +11,25 @@ export default function CurrentCard({ info }) { //shows the current forecast
 
   useEffect(() => {
     if (info) {
-
-      if(info.date.toDateString() === new Date().toDateString()){ //current day same as day selected
+      if (moment(info.date).format("MMM Do YY") === moment(new Date()).format("MMM Do YY")) {
+        //current day same as day selected
         setCurrentDate(true);
         info.temp = info.currentTemp;
-      }else{
+        info.icon = info.currentIcon;
+        info.description = info.currentDescription;
+      } else {
         setCurrentDate(false);
       }
 
       setWeatherInfo(info);
 
-      const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      };
-      setDate(info.date.toLocaleString("en-US", options)); //format day
+      setDate(moment(info.date).format("MMM Do YY")); //format day
     }
   }, [info]);
 
-  const getTime = () => { //gets current time
-    const current = new Date().toLocaleTimeString();
+  const getTime = () => {
+    //gets current time
+    const current = moment().format('LTS');
     setTime(current);
   };
 
@@ -49,17 +49,19 @@ export default function CurrentCard({ info }) { //shows the current forecast
               <p className="text">{weatherInfo.condition}</p>
             </div>
             <div className="column-current">
-          <p className="clock">{date}</p>
+              <p className="clock">{date}</p>
               <p className="temperature">{weatherInfo.temp}° C</p>
-          <p className="clock">{time}</p>
+              {currentDate && <p className="clock">{time}</p>}
             </div>
             <div className="column-current">
+              {currentDate && <p className="text">Feels like: {weatherInfo.feelsLike}° C</p>}
               <p className="text">Max temp: {weatherInfo.maxTemp}° C</p>
               <p className="text">Min temp: {weatherInfo.minTemp}° C</p>
-              {currentDate && <p className="text">Feels like: {weatherInfo.feelsLike}° C</p>}
-              {currentDate && <p className="text">
-                Wind: {weatherInfo.wind} km/h {weatherInfo.windDir}
-              </p>}
+              {currentDate && (
+                <p className="text">
+                  Wind: {weatherInfo.wind} km/h {weatherInfo.windDir}
+                </p>
+              )}
             </div>
           </div>
         </div>

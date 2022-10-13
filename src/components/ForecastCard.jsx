@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./weather.css";
+import moment from "moment/moment";
 
 export default function ForecastCard({ info, setData }) { //shows the forecast for the following 5 days
   const [weatherInfo, setWeatherInfo] = useState();
@@ -11,9 +12,8 @@ export default function ForecastCard({ info, setData }) { //shows the forecast f
     }
   }, [info]);
 
-  const getDayName = (dateStr) => {
-    const date = new Date(dateStr).toString();
-    return date.slice(0,3);
+  const getDayName = (dateStr) => { //returns short for week day
+    return moment(dateStr).format('dddd');
   };
 
   const buttonFunction = (e, info, i) =>{

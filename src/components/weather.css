@@ -42,6 +42,8 @@
   color: white;
 }
 
+
+
 .clock {
   font-size: 23px;
   margin: 0;
@@ -52,6 +54,26 @@
   font-size: 20px;
   margin: 0;
   color: white;
+}
+
+.input {
+  margin: 5px;
+  font-size: 16px;
+  background-color: #FFFFFF;
+}
+
+.search-text {
+  font-size: 20px;
+  color: black;
+}
+
+.search-button {
+  font-size: 16px;
+  color: black;
+}
+
+.search-input {
+  margin: 15px;
 }
 
 .icon {

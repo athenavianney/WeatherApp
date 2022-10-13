@@ -3,6 +3,7 @@ import "./App.css";
 import Search from "./components/Search";
 import CurrentCard from "./components/CurrentCard";
 import ForecastCard from "./components/ForecastCard";
+import moment from "moment";
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState();
@@ -16,9 +17,11 @@ function App() {
     setWeatherInfo({
       city: x.city,
       country: x.country,
-      date: new Date(data.date),
+      date: moment(data.date).format(),
       icon: data.day.condition.icon, 
+      currentIcon: x.currentIcon,
       condition: data.day.condition.text,
+      currentCondition: x.currentCondition,
       temp: data.day.avgtemp_c,
       currentTemp: x.currentTemp,
       feelsLike: x.feelsLike, 
@@ -26,7 +29,7 @@ function App() {
       minTemp: data.day.mintemp_c, 
       wind: x.wind, 
       windDir: x.windDir,
-      forecast: x.forecast
+      forecast: x.forecast,
     });
   };
 
