@@ -1,38 +1,66 @@
-.weather-card {
+.current-card {
   width: 100%;
-  background-image: url('https://images.unsplash.com/photo-1496450681664-3df85efbd29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); 
+  height: 400px;
+  background: rgb(2, 0, 36);
+}
+
+.forecast-card {
+  width: 100%;
+  height: 200px;
+  background: rgb(2, 0, 36);
+}
+
+.button-forecast {
+  flex: 20%;
+  padding: 10px;
+  background: rgb(2, 0, 36);
+}
+
+.button-forecast-active {
+  flex: 20%;
+  padding: 10px;
+  background: rgb(32, 27, 112);
+}
+
+.button-forecast:hover {
+  background-color: rgb(78, 69, 196);
+}
+
+.column-current {
+  flex: 33%;
+  padding: 10px;
+  align-self: center;
+}
+
+.row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /*position: relative;*/
 }
 
-.city {
-  font-size: 30px;
+.title {
+  font-size: 50px;
   margin: 0;
+  color: white;
 }
 
-.condition {
-  font-size: 14px;
+.clock {
+  font-size: 23px;
   margin: 0;
+  color: white;
+}
+
+.text {
+  font-size: 20px;
+  margin: 0;
+  color: white;
 }
 
 .icon {
   width: 100px;
-  margin: 0;
 }
 
 .temperature {
-  font-size: 60px;
+  font-size: 80px;
   width: auto;
   color: white;
-  margin: 0;
-}
-
-
-.feels-like {
-  font-size: 14px;
-  width: auto;
   margin: 0;
 }
