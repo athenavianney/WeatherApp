@@ -9,17 +9,18 @@ export default function Search({ data }) {
   const [weatherData, setWeatherData] = useState();
   const APIkey = process.env.REACT_APP_WEATHER_API_KEY; //API KEY stored in env file
 
+  // Re-renders once the weather information has been changed/received
   useEffect(() => {
-    // Re-renders once the weather information has been changed/received
     data(weatherData);
   }, [weatherData]);
 
+  // Gets weather data depending on the city sent and for the following 5 days
   const fetchInfo = (city) => {
-    // Gets weather data depending on the city sent and for the following 5 days
     fetch(`http://api.weatherapi.com/v1/forecast.json?key=${APIkey}&q=${city}&days=5`)
       .then((response) => response.json())
       .then((response) => {
-        setWeatherData({ //Stores only the information needed
+        //Stores only the information needed
+        setWeatherData({
           city: response.location.name,
           country: response.location.country,
           date: new Date(response.location.localtime),
@@ -35,6 +36,7 @@ export default function Search({ data }) {
           wind: response.current.wind_kph,
           windDir: response.current.wind_dir,
           forecast: response.forecast.forecastday,
+          hours: response.forecast.forecastday?.[0].hour,
         });
       })
       .catch((err) => {

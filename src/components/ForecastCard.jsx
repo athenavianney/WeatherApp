@@ -1,40 +1,73 @@
 import React, { useState, useEffect } from "react";
 import "./weather.css";
 import moment from "moment/moment";
+import ForecastByHour from "./ForecastByHour";
+import CurrentCard from "./CurrentCard";
 
-export default function ForecastCard({ info, setData }) { //shows the forecast for the following 5 days
+export default function ForecastCard({ info }) {
+  //shows the forecast for the following 5 days
   const [weatherInfo, setWeatherInfo] = useState();
   const [index, setIndex] = useState(0); //Stores which button is pressed
 
   useEffect(() => {
     if (info) {
-      setWeatherInfo(info); 
+      setWeatherInfo(info);
+      setIndex(0);
     }
   }, [info]);
 
   const getDayName = (dateStr) => { //returns short for week day
-    return moment(dateStr).format('dddd');
+    if(moment(dateStr).format("MMM Do YY") === moment(new Date()).format("MMM Do YY"))
+      return "Today";
+    return moment(dateStr).format("dddd");
   };
 
-  const buttonFunction = (e, info, i) =>{
+  const buttonFunction = (e, x, i) => {
     setIndex(i);
-    setData(info);
-  }
+    handleWeatherSelected(x);
+  };
+
+  const handleWeatherSelected = (data) => { // Stores weather information
+    const x = weatherInfo;
+    setWeatherInfo({
+      city: x.city,
+      country: x.country,
+      date: moment(data.date).format(),
+      icon: data.day.condition.icon, 
+      currentIcon: x.currentIcon,
+      condition: data.day.condition.text,
+      currentCondition: x.currentCondition,
+      temp: data.day.avgtemp_c,
+      currentTemp: x.currentTemp,
+      feelsLike: x.feelsLike, 
+      maxTemp: data.day.maxtemp_c, 
+      minTemp: data.day.mintemp_c, 
+      wind: x.wind, 
+      windDir: x.windDir,
+      forecast: x.forecast,
+      hours: data.hour
+    });
+  };
 
   return (
     <div>
       {weatherInfo !== undefined && (
-        <div className="forecast-card">
-          <div className="row">
-            {weatherInfo.forecast.map((day, i) => (
-              <button type="button" className={index === i ? "button-forecast-active" : "button-forecast"} onClick={(e) => buttonFunction(e, day, i)} key={i} id={i}>
-                <p className="text">{getDayName(day.date)}</p>
-                <img className="icon" src={day.day.condition.icon} alt="condition"></img>
-                <p className="text">{day.day.avgtemp_c} °C</p>
-              </button>
-            ))}
+        <>
+          <CurrentCard info={weatherInfo} />
+          <ForecastByHour data={weatherInfo.hours} />
+          <div className="forecast-card">
+            <p className="title-2"> 5 day forecast</p>
+            <div className="row">
+              {weatherInfo.forecast.map((day, i) => (
+                <button type="button" className={index === i ? "button-forecast-active" : "button-forecast"} onClick={(e) => buttonFunction(e, day, i)} key={i} id={i}>
+                  <p className="text">{getDayName(day.date)}</p>
+                  <img className="icon" src={day.day.condition.icon} alt="condition"></img>
+                  <p className="text">{day.day.avgtemp_c} °C</p>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

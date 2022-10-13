@@ -50,13 +50,13 @@ export default function CurrentCard({ info }) {
             </div>
             <div className="column-current">
               <p className="clock">{date}</p>
-              <p className="temperature">{weatherInfo.temp}° C</p>
+              <p className="temperature">{weatherInfo.temp} °C</p>
               {currentDate && <p className="clock">{time}</p>}
             </div>
             <div className="column-current">
-              {currentDate && <p className="text">Feels like: {weatherInfo.feelsLike}° C</p>}
-              <p className="text">Max temp: {weatherInfo.maxTemp}° C</p>
-              <p className="text">Min temp: {weatherInfo.minTemp}° C</p>
+              {currentDate && <p className="text">Feels like: {weatherInfo.feelsLike} °C</p>}
+              <p className="text">Max temp: {weatherInfo.maxTemp} °C</p>
+              <p className="text">Min temp: {weatherInfo.minTemp} °C</p>
               {currentDate && (
                 <p className="text">
                   Wind: {weatherInfo.wind} km/h {weatherInfo.windDir}

@@ -1,12 +1,18 @@
 .current-card {
   width: 100%;
-  height: 400px;
+  height: 350px;
   background: rgb(2, 0, 36);
+}
+
+.column-current {
+  flex: 33%;
+  padding: 10px;
+  align-self: center;
 }
 
 .forecast-card {
   width: 100%;
-  height: 200px;
+  height: 300px;
   background: rgb(2, 0, 36);
 }
 
@@ -26,12 +32,6 @@
   background-color: rgb(78, 69, 196);
 }
 
-.column-current {
-  flex: 33%;
-  padding: 10px;
-  align-self: center;
-}
-
 .row {
   display: flex;
 }
@@ -42,7 +42,12 @@
   color: white;
 }
 
-
+.title-2 {
+  font-size: 32px;
+  margin: 0;
+  margin-bottom: 10px;
+  color: white;
+}
 
 .clock {
   font-size: 23px;
@@ -85,4 +90,20 @@
   width: auto;
   color: white;
   margin: 0;
+}
+
+.forecast-hour {
+  width: 100%;
+  height: 250px;
+  background: rgb(5, 3, 44);
+}
+
+.column-hour {
+  flex: 17%;
+  padding: 10px;
+  align-self: center;
+}
+
+.icon-hour {
+  width: 70px;
 }
