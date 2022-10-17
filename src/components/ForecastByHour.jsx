@@ -8,14 +8,6 @@ export default function ForecastByHour({ data }) {
   const [hoursDisplay, setHoursDisplay] = useState([]);
   const [index, setIndex] = useState();
 
-  const changeDisplayHours = (data) => { //changes the 5 hours that will be on display
-    const x = [];
-    for (let i = index; i < index + 5; i++) {
-      x.push(data[i]);
-    }
-    return Promise.all(x);
-  };
-  
   useEffect(() => {
     if (data) {
       setIndex(0);
@@ -34,7 +26,16 @@ export default function ForecastByHour({ data }) {
     }
   }, [index]);
 
-  const changeHours = (amount) => { 
+  const changeDisplayHours = (data) => {
+    //changes the 5 hours that will be on display
+    const x = [];
+    for (let i = index; i < index + 5; i++) {
+      x.push(data[i]);
+    }
+    return Promise.all(x);
+  };
+  
+  const changeHours = (amount) => {
     const x = index;
     setIndex(x + amount);
   };
@@ -45,17 +46,15 @@ export default function ForecastByHour({ data }) {
         <p className="title-2">Hourly forecast</p>
         <div className="row">
           <button className="hours-button" type="button" key="goBack" id="goBack" hidden={index === 0} onClick={(e) => changeHours(-1)}>
-            <img src="https://www.freeiconspng.com/uploads/white-arrow-transparent-png-22.png" width="50" alt="Vector Png White Arrow" style={{transform: "rotate(180deg)"}} />
+            <img src="https://www.freeiconspng.com/uploads/white-arrow-transparent-png-22.png" width="50" alt="Vector Png White Arrow" style={{ transform: "rotate(180deg)" }} />
           </button>
           {hoursDisplay &&
             hoursDisplay.map((day, i) => (
-              <>
-                <div className="column-hour" key={i} id={i}>
-                  <p className="text">{moment(day.time).format("LT")}</p>
-                  <img className="icon" src={day.condition.icon} alt="condition"></img>
-                  <p className="text">{day.temp_c} °C</p>
-                </div>
-              </>
+              <div className="column-hour" key={i} id={i}>
+                <p className="text">{moment(day.time).format("LT")}</p>
+                <img className="icon" src={day.condition.icon} alt="condition"></img>
+                <p className="text">{day.temp_c} °C</p>
+              </div>
             ))}
           <button className="hours-button" type="button" key="goForward" id="goForward" hidden={index === 19} onClick={(e) => changeHours(1)}>
             <img src="https://www.freeiconspng.com/uploads/white-arrow-transparent-png-22.png" width="50" alt="Vector Png White Arrow" />
