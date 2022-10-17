@@ -4,9 +4,9 @@ import moment from "moment/moment";
 import ForecastByHour from "./ForecastByHour";
 import CurrentCard from "./CurrentCard";
 
-export default function ForecastCard({ info }) { //shows forecast for the following 5 days
+export default function ForecastCard({ info }) { //Shows forecast for the following 5-days
   const [weatherInfo, setWeatherInfo] = useState();
-  const [index, setIndex] = useState(0); //Stores which button is pressed
+  const [index, setIndex] = useState(0); // Stores which day is pressed
 
   useEffect(() => {
     if (info) {
@@ -15,7 +15,7 @@ export default function ForecastCard({ info }) { //shows forecast for the follow
     }
   }, [info]);
 
-  const getDayName = (dateStr) => { //returns short for week day
+  const getDayName = (dateStr) => { // Returns short for week day
     if(moment(dateStr).format("MMM Do YY") === moment(new Date()).format("MMM Do YY"))
       return "Today";
     return moment(dateStr).format("dddd");

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import "./weather.css";
 
-//Search city and returns weather information
+//Searches city and returns weather information
 export default function Search({ data }) {
   const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState();

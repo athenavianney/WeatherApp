@@ -11,8 +11,7 @@ export default function CurrentCard({ info }) {
   const [currentDate, setCurrentDate] = useState(true);
 
   useEffect(() => {
-    if (info) {
-      //if current day same as day selected
+    if (info) { //if current day same as day selected
       if (moment(info.date).format("MMM Do YY") === moment(new Date()).format("MMM Do YY")) {
         setCurrentDate(true);
         info.temp = info.currentTemp; 
@@ -23,9 +22,9 @@ export default function CurrentCard({ info }) {
       }
 
       setWeatherInfo(info);
-      setDate(moment(info.date).format("MMM Do YY")); //format day
+      setDate(moment(info.date).format("MMM Do YY"));
 
-      if (localTime) { //stops clock if location was changed
+      if (localTime) { // Stops clock if location was changed
         clearInterval(localTime);
       }
     }
@@ -44,7 +43,7 @@ export default function CurrentCard({ info }) {
   };
 
   useEffect(() => {
-    if (weatherInfo) {
+    if (weatherInfo) { //Starts local clock
       setLocalTime(setInterval(() => getTime(), 1000));
     }
   }, [weatherInfo]);

@@ -2,7 +2,7 @@ import moment from "moment/moment";
 import React, { useState, useEffect } from "react";
 import "./weather.css";
 
-// Displays the weather info for 5 hours on the day selec
+// Displays the weather info for 5 hours on the day selected
 export default function ForecastByHour({ data }) {
   const [hoursInfo, setHoursInfo] = useState([]);
   const [hoursDisplay, setHoursDisplay] = useState([]);
@@ -33,7 +33,6 @@ export default function ForecastByHour({ data }) {
       });
     }
   }, [index]);
-
 
   const changeHours = (amount) => { 
     const x = index;

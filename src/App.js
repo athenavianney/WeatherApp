@@ -7,9 +7,9 @@ import weatherBc from "./images/weather-background.png";
 function App() {
   const [weatherInfo, setWeatherInfo] = useState();
 
-  const handleWeatherData = useCallback((data) => { // Called when a new city was searched or a day was selected
+  const handleWeatherData = useCallback((data) => { // Called when a new city was searched or another day was selected
     setWeatherInfo(data);
-  }, [weatherInfo]);
+  }, []);
 
   return (
     <div className="App">
