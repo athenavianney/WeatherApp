@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useCallback} from "react";
 import "./App.css";
 import Search from "./components/Search";
-import CurrentCard from "./components/CurrentCard";
 import ForecastCard from "./components/ForecastCard";
-import moment from "moment";
-import ForecastByHour from "./components/ForecastByHour";
+import weatherBc from "./images/weather-background.png";
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState();
 
-  const handleWeatherData = (data) => { // Called when a new city was searched or a day was selected
+  const handleWeatherData = useCallback((data) => { // Called when a new city was searched or a day was selected
     setWeatherInfo(data);
-  };
+  }, [weatherInfo]);
 
   return (
     <div className="App">
       <hr/>
       <Search data={handleWeatherData} />
       <hr />
-      {weatherInfo !== undefined && (
+      {weatherInfo !== undefined ? (
           <ForecastCard info={weatherInfo}/>
+      ):(
+        <img src={weatherBc} alt="condition" className="weather-background"></img>
       )}
     </div>
   );

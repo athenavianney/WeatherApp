@@ -31,6 +31,7 @@ export default function ForecastCard({ info }) { //shows forecast for the follow
     setWeatherInfo({
       city: x.city,
       country: x.country,
+      region: x.region,
       date: moment(data.date).format(),
       icon: data.day.condition.icon, 
       currentIcon: x.currentIcon,
@@ -56,7 +57,7 @@ export default function ForecastCard({ info }) { //shows forecast for the follow
           <CurrentCard info={weatherInfo} />
           <ForecastByHour data={weatherInfo.hours} />
           <div className="forecast-card">
-            <p className="title-2"> 5-day forecast</p>
+            <p className="title-2">5-day forecast</p>
             <div className="row">
               {weatherInfo.forecast.map((day, i) => (
                 <button type="button" className={index === i ? "button-forecast-active" : "button-forecast"} onClick={(e) => buttonFunction(e, day, i)} key={i} id={i}>

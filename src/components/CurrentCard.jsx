@@ -54,7 +54,7 @@ export default function CurrentCard({ info }) {
       {weatherInfo !== undefined && (
         <div className="current-card">
           <p className="title">{weatherInfo.city}</p>
-          <p className="text">{weatherInfo.country}</p>
+          <p className="text">{weatherInfo.region}, {weatherInfo.country}</p>
           <div className="row">
             <div className="column-current">
               <img className="icon" style={{ width: "200px" }} src={weatherInfo.icon} alt="condition"></img>

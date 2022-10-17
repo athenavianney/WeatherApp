@@ -21,6 +21,7 @@ export default function Search({ data }) {
         setWeatherData({
           city: response.location.name,
           country: response.location.country,
+          region: response.location.region,
           date: new Date(response.location.localtime),
           icon: response.current.condition.icon,
           currentIcon: response.current.condition.icon,
