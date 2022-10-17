@@ -9,12 +9,13 @@ import ForecastByHour from "./components/ForecastByHour";
 function App() {
   const [weatherInfo, setWeatherInfo] = useState();
 
-  const handleWeatherData = (data) => { // Is called when a new city has been searched or a day was selected from city previously searched
+  const handleWeatherData = (data) => { // Called when a new city was searched or a day was selected
     setWeatherInfo(data);
   };
 
   return (
     <div className="App">
+      <hr/>
       <Search data={handleWeatherData} />
       <hr />
       {weatherInfo !== undefined && (

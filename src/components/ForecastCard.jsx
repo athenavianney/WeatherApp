@@ -4,8 +4,7 @@ import moment from "moment/moment";
 import ForecastByHour from "./ForecastByHour";
 import CurrentCard from "./CurrentCard";
 
-export default function ForecastCard({ info }) {
-  //shows the forecast for the following 5 days
+export default function ForecastCard({ info }) { //shows forecast for the following 5 days
   const [weatherInfo, setWeatherInfo] = useState();
   const [index, setIndex] = useState(0); //Stores which button is pressed
 
@@ -22,9 +21,9 @@ export default function ForecastCard({ info }) {
     return moment(dateStr).format("dddd");
   };
 
-  const buttonFunction = (e, x, i) => {
-    setIndex(i);
-    handleWeatherSelected(x);
+  const buttonFunction = (e, date, index) => {
+    setIndex(index);
+    handleWeatherSelected(date);
   };
 
   const handleWeatherSelected = (data) => { // Stores weather information
@@ -45,7 +44,8 @@ export default function ForecastCard({ info }) {
       wind: x.wind, 
       windDir: x.windDir,
       forecast: x.forecast,
-      hours: data.hour
+      hours: data.hour,
+      timezone: x.timezone
     });
   };
 
@@ -56,7 +56,7 @@ export default function ForecastCard({ info }) {
           <CurrentCard info={weatherInfo} />
           <ForecastByHour data={weatherInfo.hours} />
           <div className="forecast-card">
-            <p className="title-2"> 5 day forecast</p>
+            <p className="title-2"> 5-day forecast</p>
             <div className="row">
               {weatherInfo.forecast.map((day, i) => (
                 <button type="button" className={index === i ? "button-forecast-active" : "button-forecast"} onClick={(e) => buttonFunction(e, day, i)} key={i} id={i}>

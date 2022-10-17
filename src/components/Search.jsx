@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import "./weather.css";
 
+//Search city and returns weather information
 export default function Search({ data }) {
-  //Search city and returns weather information
-
   const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState();
   const APIkey = process.env.REACT_APP_WEATHER_API_KEY; //API KEY stored in env file
 
-  // Re-renders once the weather information has been changed/received
   useEffect(() => {
     data(weatherData);
   }, [weatherData]);
@@ -37,6 +35,7 @@ export default function Search({ data }) {
           windDir: response.current.wind_dir,
           forecast: response.forecast.forecastday,
           hours: response.forecast.forecastday?.[0].hour,
+          timezone: response.location.tz_id
         });
       })
       .catch((err) => {
@@ -56,7 +55,7 @@ export default function Search({ data }) {
     <div>
       <div className="search-input">
         <label className="search-text mb-3">Search city by name:</label>
-        <input className="input" type="text" id="city" value={cityName} onChange={(e) => setCityName(e.target.value)} placeholder="Search Location" />
+        <input className="input" type="text" id="city" value={cityName} onChange={(e) => setCityName(e.target.value)} onKeyUp={(e) => ((e.key === "Enter") ?  handleWeather(e) : null)} placeholder="Search Location" />
         <button className="search-button" onClick={(e) => handleWeather(e)}>
           Search
         </button>
